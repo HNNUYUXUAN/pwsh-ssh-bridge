@@ -1,0 +1,4 @@
+interface:
+  display_name: "PowerShell SSH Bridge"
+  short_description: "Set up and verify a local-to-Linux SSH workflow"
+  default_prompt: "Use $pwsh-ssh-bridge to inspect my local environment, establish a verified SSH connection to my Linux device, and guide any required terminal steps."

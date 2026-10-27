@@ -1,0 +1,17 @@
+# Local credentials, connection state and captured outputs belong outside this tree.
+.private/
+work/
+*.pem
+*.key
+*.ppk
+id_ed25519*
+id_rsa*
+known_hosts*
+ssh_config
+*.log
+__pycache__/
+*.zip
+dist/
+build/
+*.pyc
+.venv/

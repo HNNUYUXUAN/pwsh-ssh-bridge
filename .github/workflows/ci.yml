@@ -1,0 +1,26 @@
+name: Validate workspace
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  windows:
+    runs-on: windows-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate package inventories and links
+        run: python dev/build.py --check
+      - name: Verify packaging, rebuild and installation
+        run: python -m unittest discover -s dev -p 'test_*.py' -v
+      - name: Run local PowerShell behavior checks
+        shell: pwsh
+        run: |
+          ./tests/Test-Local.ps1 -WorkDirectory (Join-Path $env:RUNNER_TEMP 'bridge-tests')
+      - name: Build release packages
+        run: python dev/build.py
